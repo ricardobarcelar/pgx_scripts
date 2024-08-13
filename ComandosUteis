@@ -1,0 +1,8 @@
+-- Altera a permissão de Large Objects
+do $$
+declare r record;
+begin
+for r in select loid from pg_catalog.pg_largeobject loop
+   execute 'ALTER LARGE OBJECT ' || r.loid || ' OWNER TO usuario_banco';
+end loop;
+end$$;
